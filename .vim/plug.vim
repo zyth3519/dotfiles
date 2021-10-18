@@ -9,7 +9,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
 Plug 'pangloss/vim-javascript'
 Plug 'morhetz/gruvbox'
-" Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
-
-

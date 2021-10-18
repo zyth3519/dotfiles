@@ -8,9 +8,6 @@ set number
 source ~/.vim/plug.vim
 source ~/.vim/config.vim
 source ~/.vim/mapping.vim
-" source ~/.vim/user.vim
-
-autocmd FileType css setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 if $TERM == "xterm-256color"
   set t_Co=256
@@ -21,3 +18,5 @@ set softtabstop=4
 set shiftwidth=4
 
 filetype plugin on
+
+autocmd FileType css setlocal formatoptions-=c formatoptions-=r formatoptions-=o
