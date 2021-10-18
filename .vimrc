@@ -8,6 +8,8 @@ set number
 source ~/.vim/plug.vim
 source ~/.vim/config.vim
 source ~/.vim/mapping.vim
+source ~/.vim/css.vim
+source ~/.vim/user.vim
 
 if $TERM == "xterm-256color"
   set t_Co=256

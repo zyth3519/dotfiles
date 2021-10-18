@@ -8,8 +8,12 @@ inoremap <silent><expr>   pumvisible() ? coc#_select_confirm()
 " 切换注释
 nnoremap <silent>  :call nerdcommenter#Comment("x", "Toggle")<CR>
 
+" 查找文件
 let g:Lf_ShortcutF = '<C-P>'
 
 " 格式化文档
 
 map  :Autoformat<cr>
+
+" 打开文件树
+nnoremap <leader>n :NERDTreeFocus<CR>
