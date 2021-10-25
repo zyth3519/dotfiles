@@ -32,3 +32,12 @@ set background=dark
 colorscheme gruvbox
 
 " let g:NERDCreateDefaultMappings = 0
+
+" coc-nvim
+set cmdheight=2
+set updatetime=50
+set shortmess+=c
+set signcolumn=number
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')

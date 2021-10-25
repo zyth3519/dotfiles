@@ -14,6 +14,7 @@ fun! Live_Server_Handler(channel, msg)
 	if g:live_server_flag == 0
 		call OpenBrowse()
 		let g:live_server_flag = 1
+		echo "服务器成功启动"
 	endif
 
 endfunc
@@ -43,5 +44,17 @@ fun! OpenBrowse()
 
 endfunc
 
+fun! Sstop()
+	if g:live_server_status == "run"
+		call job_stop(g:live_server)
+		echo "服务器成功停止"
+	elseif g:live_server_status == "none" " 若服务器未启动，启动它
+		echo "服务器未启动"
+	endif
+endfunc
+
+
+
 command! Sstart call Sstart()
+command! Sstop call Sstop()
 command! OpenBrowse call OpenBrowse()
