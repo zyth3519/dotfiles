@@ -19,8 +19,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'othree/html5.vim'
 " 常用代码段
 Plug 'honza/vim-snippets'
-" ranger文件管理器
-Plug 'kevinhwang91/rnvimr'
 " 内置终端增强
 Plug 'skywind3000/vim-terminal-help'
 
@@ -28,4 +26,12 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate','branch':'0.5-compat'
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
+
+" git
+Plug 'kdheepak/lazygit.nvim'
+
+" 文件树
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
