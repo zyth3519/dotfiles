@@ -3,15 +3,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
 
-" html服务器配置
-"let g:bracey_browser_command = 1
-"let g:bracey_refresh_on_save = 0
-"let g:bracey_server_allow_remote_connections = 1
-"let g:bracey_server_port = 8000
-"let g:bracey_server_path = "http://0.0.0.0"
-
 " vim-javascript
-"
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_ngdoc = 1
@@ -41,3 +33,21 @@ set signcolumn=number
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+"===============Ranger===================
+" Make Ranger replace Netrw and be the file explorer
+let g:rnvimr_enable_ex = 1
+" Make Ranger to be hidden after picking a file
+let g:rnvimr_enable_picker = 1
+
+" 保存文件后自动格式化代码
+au BufWrite * :Autoformat
+
+"=====================注释==========================
+"" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+let g:rainbow_active = 1

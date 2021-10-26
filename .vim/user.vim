@@ -1,3 +1,4 @@
+"=====================vim中打开文件服务器,常用于预览html==================
 let g:live_server_status = "none"
 " 默认浏览器
 let g:open_browse = "google-chrome-stable"
@@ -32,8 +33,6 @@ fun! VIM_Live_Server_Handler(channel, msg)
 	endif
 
 endfunc
-
-
 
 " 启动服务器
 fun! Sstart()
@@ -87,8 +86,21 @@ fun! Sstop()
 	endif
 endfunc
 
-
-
 command! Sstart call Sstart()
 command! Sstop call Sstop()
 command! OpenBrowse call OpenBrowse()
+
+"===================================nvim终端=========================================
+function! TerminalQuit()
+    let bid = get(t:, '__terminal_bid__', -1)
+    if bid < 0
+        return
+    endif
+    let name = bufname(bid)
+    if name == ''
+        return
+    endif
+    exec "bw! ". name
+endfunc
+
+au TermClose * call TerminalQuit()
