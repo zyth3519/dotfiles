@@ -26,3 +26,4 @@ set cmdheight=2
 set number
 " 相对行号
 set relativenumber
+syntax on

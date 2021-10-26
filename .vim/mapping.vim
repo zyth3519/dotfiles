@@ -8,7 +8,7 @@ let g:Lf_ShortcutF = '<C-P>'
 map  :Autoformat<cr>
 
 " 打开文件树
-nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>n <Cmd>CocCommand explorer<CR>
 
 "===============================coc-nvim=================================
 " 输入ctrl+enter 键入第一个和选择选项
