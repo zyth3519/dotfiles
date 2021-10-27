@@ -25,9 +25,9 @@ imap <C-_>  :call nerdcommenter#Comment("n","Invert") <CR>i
 nnoremap <silent> <leader>gg :LazyGit<CR>
 "" ===============================coc-nvim=================================
 " 输入ctrl+enter 键入第一个和选择选项
-inoremap <silent><expr>   pumvisible() ? coc#_select_confirm()
-			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\"
+inoremap <silent><expr>  pumvisible() ? coc#_select_confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\"
 
+" TAB补全
 inoremap <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :
@@ -39,11 +39,10 @@ function! s:check_back_space() abort
 	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-o> coc#refresh()
+" 按ctrl+space强制开启补全菜单
+inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+" 导航诊断
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -53,7 +52,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
+" 使用K打开文档
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
@@ -72,9 +71,6 @@ nmap <leader>rn <Plug>(coc-rename)
 " 新开窗口修改
 nmap <leader>rf <Plug>(coc-refactor)
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-@> coc#refresh()
-
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
 nmap <silent> <C-s> <Plug>(coc-range-select)
@@ -86,3 +82,8 @@ nmap <silent> <C-d> <Plug>(coc-cursors-word)
 xmap <silent> <C-d> <Plug>(coc-cursors-range)
 " use normal command like `<leader>xi(`
 nmap <leader>x  <Plug>(coc-cursors-operator)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)

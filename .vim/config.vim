@@ -33,9 +33,10 @@ colorscheme gruvbox
 
 " coc-nvim
 set cmdheight=2
-set updatetime=50
+set updatetime=100
 set shortmess+=c
 set signcolumn=number
+set hidden
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
