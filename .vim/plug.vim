@@ -34,4 +34,9 @@ Plug 'kdheepak/lazygit.nvim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
+
+" 浮动终端
+Plug 'voldikss/vim-floaterm'
+" vim输入法
+Plug 'lilydjwg/fcitx.vim'
 call plug#end()

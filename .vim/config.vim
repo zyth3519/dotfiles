@@ -1,3 +1,6 @@
+" 输入法配置
+let g:fcitx5_remote = "fcitx5-remote"
+
 " vim窗口默认横向为右
 set splitright
 

@@ -44,7 +44,7 @@ fun! Sstart()
 
 	let cmd = "live-server --no-browser --port=" . g:live_server_port . " ."
 
-	if has('nvim') 
+	if has('nvim')
 		let g:live_server = jobstart(cmd,{"on_stdout":"NVIM_Live_Server_Handler"})
 	else
 		let g:live_server = job_start(cmd,{"out_cb":"VIM_Live_Server_Handler"})
@@ -59,7 +59,7 @@ fun! OpenBrowse()
 	" 服务器启动后打开浏览器
 	if g:live_server_status == "run"
 
-		if has('nvim') 
+		if has('nvim')
 			call jobstart(cmd)
 		else
 			call job_start(cmd)
@@ -92,15 +92,15 @@ command! OpenBrowse call OpenBrowse()
 
 "===================================nvim终端=========================================
 function! TerminalQuit()
-    let bid = get(t:, '__terminal_bid__', -1)
-    if bid < 0
-        return
-    endif
-    let name = bufname(bid)
-    if name == ''
-        return
-    endif
-    exec "bw! ". name
+	let bid = get(t:, '__terminal_bid__', -1)
+	if bid < 0
+		return
+	endif
+	let name = bufname(bid)
+	if name == ''
+		return
+	endif
+	exec "bw! ". name
 endfunc
 
 au TermClose * call TerminalQuit()
