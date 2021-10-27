@@ -29,8 +29,6 @@ syntax enable
 set background=dark
 colorscheme gruvbox
 
-" let g:NERDCreateDefaultMappings = 0
-
 " coc-nvim
 set cmdheight=2
 set updatetime=100
@@ -52,3 +50,14 @@ let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 
 let g:rainbow_active = 1
+
+" 文件树Defx
+call defx#custom#option('_', {
+			\ 'winwidth': 30,
+			\ 'split': 'vertical',
+			\ 'direction': 'topleft',
+			\ 'show_ignored_files': 0,
+			\ 'buffer_name': '',
+			\ 'toggle': 1,
+			\ 'resume': 1
+			\ })
