@@ -4,10 +4,9 @@ coc-nvim 插件
 
 1. coc-css 
 2. coc-emmet
-3. coc-explorer
-4. coc-html 
-5. coc-json 
-6. coc-markdownlint
-7. coc-python 
-8. coc-tsserver 
-9. coc-vetur 
+3. coc-html 
+4. coc-json 
+5. coc-markdownlint
+6. coc-python 
+7. coc-tsserver 
+8. coc-vetur 
