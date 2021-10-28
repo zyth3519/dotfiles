@@ -7,87 +7,61 @@ let g:live_server_port = 8000
 " 服务器开启时是否打开网页，0 打开 1  不打开
 let g:live_server_flag = 0
 
-" 回调函数服务器启动打开浏览器
-" nvim
-fun! NVIM_Live_Server_Handler(job_id,data, event)
-
-	let g:live_server_status = "run"
-
-	if g:live_server_flag == 0
-		call OpenBrowse()
-		let g:live_server_flag = 1
-		echo "服务器成功启动"
-	endif
-
-endfunc
-
-" vim
-fun! VIM_Live_Server_Handler(channel, msg)
-
-	let g:live_server_status = "run"
-
-	if g:live_server_flag == 0
-		call OpenBrowse()
-		let g:live_server_flag = 1
-		echo "服务器成功启动"
-	endif
-
-endfunc
-
-" 启动服务器
-fun! Sstart()
-	" 检查服务器是否启动
-	if g:live_server_status == "run"
-		echo "live_server已经启动"
-		return
-	endif
-
-	let cmd = "live-server --no-browser --port=" . g:live_server_port . " ."
-
-	if has('nvim')
-		let g:live_server = jobstart(cmd,{"on_stdout":"NVIM_Live_Server_Handler"})
-	else
-		let g:live_server = job_start(cmd,{"out_cb":"VIM_Live_Server_Handler"})
-	endif
-
-endfunc
+let g:file_folder = v:null
 
 fun! OpenBrowse()
-	let cmd = g:open_browse . " http://127.0.0.1:" . g:live_server_port . "/"  . expand("%")
+	" 浏览器打开路径
+	let g:open_browse_cmd = g:open_browse . " http://127.0.0.1:" . g:live_server_port . "/"  . expand('%:t')
 
-
-	" 服务器启动后打开浏览器
+	" 判断服务器是否运行
 	if g:live_server_status == "run"
+		" 当前服务器所处文件加与文件所在文件夹不一致，重新启动服务器
+		if g:file_folder != expand("%:p:h")
+			call Sstop()
+			" 服务器打开文件夹，不设置默认为null
+			let g:file_folder = expand("%:p:h")
+			" 是否打开浏览器的标记，重新启动服务器，要将此值重置
+			let g:live_server_flag = 0
+			call SStart()
 
-		if has('nvim')
-			call jobstart(cmd)
-		else
-			call job_start(cmd)
+		elseif g:file_folder == expand("%:p:h") " 当前服务器所处文件加与文件所在文件夹一致，打开浏览器
+			call jobstart(g:open_browse_cmd)
 		endif
 
-	elseif g:live_server_status == "none" " 若服务器未启动，启动它
+		" 服务器未在运行，设置服务器打开文件夹，并启动服务器
+	elseif g:live_server_status == "none"
+		let g:file_folder = expand("%:p:h")
 		call Sstart()
 	endif
 
 endfunc
 
-fun! Sstop()
-	if g:live_server_status == "run"
+" 回调函数服务器启动打开浏览器
+fun! Live_Server_Handler(job_id,data, event)
 
-		if has('nvim')
-			call jobstop(g:live_server)
-		else
-			call job_stop(g:live_server)
-		endif
+	let g:live_server_status = "run"
 
-		echo "服务器成功停止"
-	elseif g:live_server_status == "none" " 若服务器未启动，启动它
-		echo "服务器未启动"
+	if g:live_server_flag == 0
+		call jobstart(g:open_browse_cmd)
+		let g:live_server_flag = 1
 	endif
+
 endfunc
 
-command! Sstart call Sstart()
-command! Sstop call Sstop()
+fun! Sstop()
+	call jobstop(g:live_server)
+endfunc
+
+" 启动服务器
+fun! Sstart()
+
+	" 服务器启动命令
+	let cmd = "live-server --no-browser --port=" . g:live_server_port . " '" . g:file_folder . "'"
+
+	let g:live_server = jobstart(cmd,{"on_stdout":"Live_Server_Handler"})
+
+endfunc
+
 command! OpenBrowse call OpenBrowse()
 
 "===================================nvim终端=========================================

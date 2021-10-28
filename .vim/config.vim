@@ -1,3 +1,4 @@
+set clipboard+=unnamedplus
 " 输入法配置
 let g:fcitx5_remote = "fcitx5-remote"
 
