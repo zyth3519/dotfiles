@@ -1,7 +1,7 @@
 let g:Lf_ShortcutF = '<C-P>'
 
 " 格式化文档
-noremap <M-C-L> :Autoformat<CR>
+noremap <M-C-L> :Prettier<CR>
 
 " 打开文件树
 nnoremap <leader>n :Defx -columns=icons:indent:filename:type<CR>

@@ -1,8 +1,6 @@
 call plug#begin('~/.vim/plugged')
 " 代码补全
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-" 代码格式化
-Plug 'vim-autoformat/vim-autoformat'
 " 模糊查找
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 " 注释
