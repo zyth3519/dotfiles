@@ -9,7 +9,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'pangloss/vim-javascript'
 " 括号补全
 Plug 'jiangmiao/auto-pairs'
-" html内嵌css js 格式
+" html内连js 格式
 Plug 'othree/html5.vim'
 " 常用代码段
 Plug 'honza/vim-snippets'
@@ -39,4 +39,5 @@ Plug 'lilydjwg/fcitx.vim'
 " 文件树
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
+
 call plug#end()

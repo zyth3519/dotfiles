@@ -1,25 +1,29 @@
 let g:Lf_ShortcutF = '<C-P>'
 
 " 格式化文档
-noremap <M-C-L> :Prettier<CR>
+noremap <silent> <M-C-L> :Format<CR>
 
 " 打开文件树
-nnoremap <leader>n :Defx -columns=icons:indent:filename:type<CR>
+nnoremap <silent> <leader>n :Defx -columns=icons:indent:filename:type<CR>
 
 " 调整窗口大小
-nnoremap  <
-nnoremap  >
+nnoremap <silent>   <
+nnoremap <silent>  >
 
 " 切换窗口
-nnoremap <leader>j j
-nnoremap <leader>k k
-nnoremap <leader>h h
-nnoremap <leader>l l
+nnoremap <silent> <leader>j j
+nnoremap <silent> <leader>k k
+nnoremap <silent> <leader>h h
+nnoremap <silent> <leader>l l
+
+" 切换文件
+nnoremap <silent> ]] :bn <cr>
+nnoremap <silent> [[ :bp <cr>
 
 " ctrl+/ 注释
-nmap <C-_> :call nerdcommenter#Comment("n","Invert") <CR>
-vmap <C-_> :call nerdcommenter#Comment("n","Invert") <CR>
-imap <C-_>  :call nerdcommenter#Comment("n","Invert") <CR>i
+nmap <silent> <C-_> :call nerdcommenter#Comment("n","Invert") <CR>
+vmap <silent> <C-_> :call nerdcommenter#Comment("n","Invert") <CR>
+imap <silent> <C-_>  :call nerdcommenter#Comment("n","Invert") <CR>i
 
 " LazyGit
 nnoremap <silent> <leader>gg :LazyGit<CR>

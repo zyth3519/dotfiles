@@ -5,6 +5,10 @@ let g:fcitx5_remote = "fcitx5-remote"
 " vim窗口默认横向为右
 set splitright
 
+set autoindent
+set hidden
+set nocompatible
+
 " airline配置
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='gruvbox'
@@ -40,9 +44,11 @@ set hidden
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
 
-" 添加格式化命令 :Prettier
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" 鼠标支持
+set mouse=a
 
 "=====================注释==========================
 "" Add spaces after comment delimiters by default
