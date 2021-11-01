@@ -4,7 +4,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lock
 " 模糊查找
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 " 注释
-Plug 'preservim/nerdcommenter'
+Plug 'terrortylor/nvim-comment'
 " js支持
 Plug 'pangloss/vim-javascript'
 " 括号补全
@@ -39,5 +39,4 @@ Plug 'lilydjwg/fcitx.vim'
 " 文件树
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
-
 call plug#end()

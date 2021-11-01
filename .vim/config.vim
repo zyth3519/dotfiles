@@ -1,4 +1,11 @@
+" 开启系统输入法
 set clipboard+=unnamedplus
+ 
+" Add `:OR` command for organize imports of the current buffer.
+ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" vim终端大小
+let g:terminal_height = 15
+
 " 输入法配置
 let g:fcitx5_remote = "fcitx5-remote"
 

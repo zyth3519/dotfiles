@@ -20,16 +20,17 @@ nnoremap <silent> <leader>l l
 nnoremap <silent> ]] :bn <cr>
 nnoremap <silent> [[ :bp <cr>
 
-" ctrl+/ 注释
-nmap <silent> <C-_> :call nerdcommenter#Comment("n","Invert") <CR>
-vmap <silent> <C-_> :call nerdcommenter#Comment("n","Invert") <CR>
-imap <silent> <C-_>  :call nerdcommenter#Comment("n","Invert") <CR>i
-
 " LazyGit
 nnoremap <silent> <leader>gg :LazyGit<CR>
 "" ===============================coc-nvim=================================
 " 输入ctrl+enter 键入第一个和选择选项
-inoremap <silent><expr>  pumvisible() ? coc#_select_confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\"
+inoremap <silent><expr> pumvisible() ? coc#_select_confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\
+
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 
 " TAB补全
 inoremap <silent><expr> <TAB>
