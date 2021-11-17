@@ -44,5 +44,6 @@
         "python"
     ],
     "prettier.tabWidth": 4,
-    "python.formatting.provider": "yapf"
+    "python.formatting.provider": "yapf",
+    "rainbow-fart.disable-voice-packages": []
 }

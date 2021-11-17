@@ -5,8 +5,7 @@ source ~/.vim/plug.vim
 source ~/.vim/config.vim
 source ~/.vim/mapping.vim
 source ~/.vim/user.vim
-source ~/.vim/treesitter.vim
-source ~/.vim/css.vim
+source ~/.vim/lua.vim
 
 if $TERM == "xterm-256color"
 	set t_Co=256
@@ -18,8 +17,6 @@ set shiftwidth=4
 
 filetype plugin on
 
-autocmd FileType css setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
 " 为消息显示提供空间
 set cmdheight=2
 
@@ -29,3 +26,5 @@ set number
 " 相对行号
 set relativenumber
 syntax on
+
+autocmd BufNewFile,BufRead * :set formatoptions-=c formatoptions-=r formatoptions-=o

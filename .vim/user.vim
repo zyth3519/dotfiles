@@ -1,7 +1,8 @@
 "=====================vim中打开文件服务器,常用于预览html==================
 let g:live_server_status = "none"
 " 默认浏览器
-let g:open_browse = "google-chrome-stable"
+" let g:open_browse = 'google-chrome-stable'
+let g:open_browse = "firefox"
 " 服务器端口
 let g:live_server_port = 8000
 " 服务器开启时是否打开网页，0 打开 1  不打开
@@ -63,7 +64,7 @@ fun! Sstart()
 endfunc
 
 command! OpenBrowse call OpenBrowse()
-
+command! Sstop call Sstop()
 "===================================nvim终端=========================================
 function! TerminalQuit()
 	let bid = get(t:, '__terminal_bid__', -1)
