@@ -596,7 +596,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (defun open-browser()
+ (defun open-browser()
     "使用live-server 开启服务器, 端口号地址http://127.0.0.1:8000/ "
     (interactive)
     (let (
@@ -612,8 +612,14 @@ before packages are loaded."
     "关闭live-server服务器"
     (interactive)
   (if (string= (symbol-name (process-status "live-server-process")) "run")
-      (delete-process "*live-server*")
+      (progn 
+        (delete-process "*live-server*")
+        (message "服务器关闭成功"))
     (message "服务器未开启")))
+
+  ;; 将谷歌翻译添加代理, 需安装proxychians, curl
+  (setq google-translate-backend-commands '((proxychains :name "proxychains" :args ("-q" "curl" "-s" "-L" "-A"))))
+  (setq google-translate-backend-method 'proxychains)
   )
 
 
