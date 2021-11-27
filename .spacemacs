@@ -33,6 +33,8 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     (rust :variables
+          rust-backend 'lsp)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -40,21 +42,24 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      ;; 自动补全
      auto-completion
-
      ;; 前端开发
      import-js
      prettier
      (json :variables
            json-fmt-tool 'prettier
-           json-fmt-on-save t
+           ;; json-fmt-on-save t
            json-backend 'lsp)
+     tern
      (javascript :variables
                  javascript-fmt-tool 'prettier
-                 javascript-fmt-on-save t
-                 javascript-backend 'lsp)
+                 ;; javascript-fmt-on-save t
+                 javascript-backend 'lsp
+                 js2-mode-show-strict-warnings nil
+                 js2-mode-show-parse-errors nil
+                 javascript-repl `nodejs)
      (typescript :variables
                  typescript-backend 'lsp
-                 typescript-fmt-on-save t
+                 ;; typescript-fmt-on-save t
                  typescript-fmt-tool 'prettier)
      (vue :variables
           vue-backend 'lsp
@@ -65,22 +70,28 @@ This function should only modify configuration layer settings."
      php
      emacs-lisp
      better-defaults
-     git
-     ;; helm
-     (ivy :variables
-          ivy-enable-icons t)
+     (git :variables
+          git-enable-magit-delta-plugin t)
+     (helm :variables
+           helm-enable-auto-resize t)
+     ;; (ivy :variables
+     ;;      ivy-enable-icons t)
      (lsp :variables
           lsp-lens-enable t
           lsp-headerline-breadcrumb-enable t
           css-enable-lsp t
           less-enable-lsp t
           scss-enable-lsp t
-          html-enable-lsp t)
+          html-enable-lsp t
+          lsp-rust-server 'rust-analyzer
+          cargo-process-reload-on-modify t)
+     (unicode-fonts :variables
+                    unicode-fonts-enable-ligatures t)
      helpful
      markdown
      multiple-cursors
-     selectric
      org
+     emoji
      (chinese :variables
               chinese-use-fcitx5 t
               chinese-enable-fcitx t
@@ -97,7 +108,7 @@ This function should only modify configuration layer settings."
                treemacs-use-all-the-icons-theme t)
      (python :variables
              python-backend 'lsp
-             python-format-on-save t
+             ;; python-format-on-save t
              python-formatter 'black
              python-lsp-server 'pylsp
              python-sort-imports-on-save t)
@@ -268,8 +279,14 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(atom-one-dark
-                         spacemacs-dark
+   dotspacemacs-themes '(zenburn
+                         doom-one
+                         doom-one-light
+                         atom-one-dark
+                         gruvbox-light-medium
+                         gruvbox-dark-hard
+                         gruvbox-dark-soft
+                         gruvbox-dark-medium
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -604,15 +621,13 @@ before packages are loaded."
       (if (string= (symbol-name (process-status "live-server-process")) "run")
           (delete-process "*live-server*"))
       (start-process "live-server-process" "*live-server*" "live-server" "--no-browser" "--port=8000" default-directory)
-      (start-process "live-server-process" "*live-server*" "google-chrome-stable" browser-url)
-      )
-    )
+      (start-process "live-server-process" "*live-server*" "google-chrome-stable" browser-url)))
 
   (defun stop-live-server()
     "关闭live-server服务器"
     (interactive)
   (if (string= (symbol-name (process-status "live-server-process")) "run")
-      (progn 
+      (progn
         (delete-process "*live-server*")
         (message "服务器关闭成功"))
     (message "服务器未开启")))
