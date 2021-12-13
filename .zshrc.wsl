@@ -144,5 +144,5 @@ fix_wsl2_interop() {
 
 fix_wsl2_interop
 
-# 彩虹猫
+# 打开终端的彩虹信息
 fortune | cowsay | lolcat
