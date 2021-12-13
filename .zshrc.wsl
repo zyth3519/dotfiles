@@ -109,10 +109,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export WINDOWSIP=`cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'`
 
 # 设置proxychains的代理
+# 获取wsl访问windows的ip
+export WINDOWSIP=`cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'`
+# 设置proxychains的安静模式
 echo "quiet_mode" > $HOME/.proxychains/proxychains.conf
+# 设置配置
 echo "[ProxyList]" >> $HOME/.proxychains/proxychains.conf
 echo "socks5 "$WINDOWSIP" 10808" >> $HOME/.proxychains/proxychains.conf
 
@@ -130,6 +133,7 @@ function er() {
 alias cls="clear"
 alias explorer="er"
 
+# 修复wsl2下的windows命令
 fix_wsl2_interop() {
     for i in $(pstree -np -s $$ | grep -o -E '[0-9]+'); do
         if [[ -e "/run/WSL/${i}_interop" ]]; then
@@ -140,4 +144,5 @@ fix_wsl2_interop() {
 
 fix_wsl2_interop
 
+# 彩虹猫
 fortune | cowsay | lolcat
