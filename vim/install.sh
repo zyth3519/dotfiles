@@ -22,10 +22,6 @@ cp .vimrc $NVIM_INIT_FILE
 cp .vimrc $VIM_INIT_FILE
 cp -r .vim/* $CONFIG_DIR
 
-BASH_CONFIG_FILE=$HOME/.bashrc
-
-# cat .bashrc >> $BASH_CONFIG_FILE
-
 echo ""
 echo "安装vim-plug"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
