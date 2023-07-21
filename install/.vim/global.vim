@@ -1,16 +1,7 @@
 " 设置前缀键
 let mapleader="\<space>"
 
-source ~/.vim/plug.vim
-source ~/.vim/config.vim
-source ~/.vim/mapping.vim
-source ~/.vim/user.vim
-source ~/.vim/lua.vim
-
-if $TERM == "xterm-256color"
-	set t_Co=256
-endif
-
+" 缩进
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -26,5 +17,3 @@ set number
 " 相对行号
 set relativenumber
 syntax on
-
-autocmd BufNewFile,BufRead * :set formatoptions-=c formatoptions-=r formatoptions-=o
