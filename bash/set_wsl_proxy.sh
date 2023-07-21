@@ -1,2 +1,2 @@
 BASH_CONFIG_FILE=$HOME/.bashrc
-cat .bashrc >> $BASH_CONFIG_FILE
+cat wsl_proxy >> $BASH_CONFIG_FILE
