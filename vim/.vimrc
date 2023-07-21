@@ -8,6 +8,18 @@ else
     let g:local_init_file='~/.vimrc'
 endif
 
+" 判断当前是不是wsl环境
+if has("unix")
+  let lines = readfile("/proc/version")
+  if stridx(lines[0], "microsoft") != -1
+	  let g:wsl=1
+  else
+	  let g:wsl=0
+  endif
+else
+	  let g:wsl=0
+endif
+
 call plug#begin(g:local_plugin_path)
 call plug#end()
 

@@ -1,3 +1,33 @@
+" 安装插件
+call plug#begin()
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "coc-nvim
+
+if has('nvim')
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' } "defx.vim
+else
+  Plug 'Shougo/defx.nvim' "defx.nvim
+  Plug 'roxma/nvim-yarp' "defx.nvim
+  Plug 'roxma/vim-hug-neovim-rpc' "defx.nvim
+endif 
+call plug#end()
+
+if g:wsl
+	set clipboard+=unnamedplus
+
+	let g:clipboard = {
+          \   'name': 'win32yank-wsl',
+          \   'copy': {
+          \      '+': 'win32yank.exe -i --crlf',
+          \      '*': 'win32yank.exe -i --crlf',
+          \    },
+          \   'paste': {
+          \      '+': 'win32yank.exe -o --lf',
+          \      '*': 'win32yank.exe -o --lf',
+          \   },
+          \   'cache_enabled': 0,
+          \ }
+endif
+
 " 设置前缀键
 let mapleader="\<space>"
 
