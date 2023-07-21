@@ -5,6 +5,7 @@ NVIM_INIT_FILE=$HOME/.config/nvim/init.vim
 VIM_INIT_FILE=$HOME/.vimrc
 GLOBAL_FILE=$HOME/.vim/global.vim
 
+
 if [ ! -d $NVIM_INIT_DIR ]; then
   mkdir -p $NVIM_INIT_DIR
 fi
@@ -18,9 +19,12 @@ echo .vimrc '>>' $NVIM_INIT_FILE
 echo .vimrc '>>' $VIM_INIT_FILE
 echo .vim '>>' $CONFIG_DIR
 
-cp .vimrc $NVIM_INIT_FILE
 cp .vimrc $VIM_INIT_FILE
+ln -s $VIM_INIT_FILE $NVIM_INIT_FILE
 cp -r .vim/* $CONFIG_DIR
+
+
+ln -s $CONFIG_DIR/coc-settings.json $NVIM_INIT_DIR/coc-settings.json
 
 echo ""
 echo "安装vim-plug"
