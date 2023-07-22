@@ -8,6 +8,7 @@ else
     let g:local_init_file='~/.vimrc'
 endif
 
+
 " 判断当前是不是wsl环境
 if has("unix")
   let lines = readfile("/proc/version")
