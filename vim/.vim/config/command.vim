@@ -13,8 +13,14 @@ function EditConfig(...)
     endif
 endfunction
 
+if has('nvim')
+    let s:local_init_file='~/.config/nvim/init.vim'
+else
+    let s:local_init_file='~/.vimrc'
+endif
+
 command! -nargs=? CE :call EditConfig(<f-args>)
-command! -nargs=0 Init :execute 'edit' g:local_init_file
+command! -nargs=0 Init :execute 'edit' s:local_init_file
 
 " 关闭文件
 function CloseOtherBuffers() 
