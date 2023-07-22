@@ -9,5 +9,7 @@
 				"markdown"
 			]
 		}
-	}
+	},
+	"tsserver.useLocalTsdk": true,
+	"tsserver.locale": "zh-CN"
 }

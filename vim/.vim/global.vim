@@ -1,7 +1,9 @@
 " 安装插件
 call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "coc-nvim
-
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'altercation/vim-colors-solarized'
 if has('nvim')
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' } "defx.vim
 else
@@ -36,8 +38,6 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-filetype plugin on
-
 " 为消息显示提供空间
 set cmdheight=2
 
@@ -46,4 +46,8 @@ set cmdheight=2
 set number
 " 相对行号
 set relativenumber
-syntax on
+
+syntax enable
+filetype plugin on
+set background=dark
+colorscheme solarized
