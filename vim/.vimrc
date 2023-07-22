@@ -8,7 +8,6 @@ else
     let g:local_init_file='~/.vimrc'
 endif
 
-
 " 判断当前是不是wsl环境
 if has("unix")
   let lines = readfile("/proc/version")
@@ -26,24 +25,7 @@ call plug#end()
 
 execute 'source' g:local_global_file
 
+" 加载所有配置
 for file in split(glob(g:local_config_dir_path . '/*.vim'))
     execute 'source' file
 endfor
-
-function EditConfig(...)
-    if len(a:000) == 0
-        execute 'edit' g:local_global_file
-    else
-        let l:args=split(a:000[0],' ')
-        if len(l:args) == 1
-            let l:file_name = l:args[0]
-            execute 'edit' g:local_config_dir_path . '/' . l:file_name . '.vim'
-        else
-            echo '参数错误'
-        endif
-    endif
-endfunction
-
-
-command! -nargs=? CE :call EditConfig(<f-args>)
-command! -nargs=0 Init :execute 'edit' g:local_init_file

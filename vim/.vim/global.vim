@@ -3,7 +3,10 @@ call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "coc-nvim
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'altercation/vim-colors-solarized'
+Plug 'yianwillis/vimcdoc'
+Plug 'mhartington/oceanic-next'
+Plug 'skywind3000/vim-terminal-help'
+
 if has('nvim')
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' } "defx.vim
 else
@@ -47,7 +50,11 @@ set number
 " 相对行号
 set relativenumber
 
-syntax enable
-filetype plugin on
-set background=dark
-colorscheme solarized
+" 窗口操作
+nmap <silent> <C-j> <C-w>j
+nmap <silent> <C-k> <C-w>k
+nmap <silent> <C-h> <C-w>h
+nmap <silent> <C-l> <C-w>l
+
+
+
