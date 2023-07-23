@@ -1,7 +1,5 @@
 # coc
 
-coc 插件
-
 - coc-json
 - coc-pairs
 - coc-tsserver
@@ -9,6 +7,8 @@ coc 插件
 vim/markdown 类型文件需要安装 `efm-langserver`
 
 # fzf
+
+需要安装 `rg`
 
 插件推荐使用`fd`，会自动读取 git 仓库中的 `.gitignore` 文件
 
