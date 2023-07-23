@@ -6,6 +6,7 @@ nmap <silent> <leader>f :Defx  -search=`expand('%:p')` -toggle <cr>
 "打开vim自动打开defx
 func! ArgFunc() abort
 	let s:arg = argv(0)
+	echo s:arg
 	if isdirectory(s:arg)
 		return s:arg
 	else
@@ -13,7 +14,7 @@ func! ArgFunc() abort
 	endif
 endfunc
 
-autocmd VimEnter * Defx `ArgFunc()` -no-focus -search=`expand('%:p')`
+autocmd VimEnter * silent! execute "Defx `ArgFunc()` -no-focus -search=`expand('%:p')`"
 
 " 设置defx树的一些格式
 call defx#custom#option('_', {
