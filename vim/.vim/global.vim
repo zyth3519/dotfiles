@@ -14,6 +14,8 @@ else
   Plug 'roxma/nvim-yarp' "defx.nvim
   Plug 'roxma/vim-hug-neovim-rpc' "defx.nvim
 endif 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 if g:wsl

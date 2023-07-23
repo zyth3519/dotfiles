@@ -62,5 +62,9 @@ function! s:defx_my_settings() abort
 	nnoremap <silent><buffer><expr> q        defx#do_action('quit')
 	nnoremap <silent><buffer><expr> <        defx#do_action('resize',  defx#get_context().winwidth - 10)
 	nnoremap <silent><buffer><expr> >        defx#do_action('resize',  defx#get_context().winwidth + 10)
+	nnoremap <silent><buffer><expr> .        defx#do_action('toggle_ignored_files')
+	nnoremap <silent><buffer><expr> r        defx#do_action('redraw')
+	nnoremap <silent><buffer><expr> s        defx#do_action('toggle_columns',  'mark:indent:icon:filename:type:size:time')
+	nnoremap <silent><buffer><expr> E        defx#do_action('open', 'vsplit')
 nnoremap <silent><buffer><expr> <2-LeftMouse>
 endfunction
