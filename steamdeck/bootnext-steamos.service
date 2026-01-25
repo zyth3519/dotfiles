@@ -1,0 +1,10 @@
+[Unit]
+Description=Set UEFI BootNext to SteamOS
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/bash -c 'efibootmgr -n $(efibootmgr | grep BootCurrent | tr -cd [:digit:])'
+
+[Install]
+WantedBy=multi-user.target

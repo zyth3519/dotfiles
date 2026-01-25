@@ -1,0 +1,20 @@
+# [Unit] 段：描述服务信息、依赖关系（可选但推荐配置）
+[Unit]
+# 服务名称（自定义，用于日志和提示信息）
+Description=Start Set localwindows
+
+# [Service] 段：核心配置，定义服务如何运行
+[Service]
+# 运行类型（关键参数，常用3种）：
+# - Simple（默认）：命令启动后直接在前台运行，systemd认为启动成功
+# - Forking：命令启动后会fork子进程，父进程退出（适用于后台运行的程序）
+# - Oneshot：仅执行一次命令后退出（适用于一次性启动脚本，**推荐用于你的自定义启动脚本**）
+Type=Oneshot
+# 你的自定义脚本/程序的绝对路径（核心参数，必须正确）
+ExecStart=/etc/systemd/system/set_localwindows.sh
+ 
+# [Install] 段：定义服务如何被启用（开机自启相关）
+[Install]
+# 开机自启的目标级别：多用户模式（默认，适用于绝大多数场景）
+WantedBy=multi-user.target
+
