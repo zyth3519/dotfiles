@@ -142,7 +142,7 @@ widgets:
     options:
       label: "<span>\uf017</span>{%H:%M}"
       label_alt: "<span>\uf017</span>{%A, %B %d. %Y %H:%M}"
-      locale: "hu_HU"
+      locale: "zh_CN"
       timezones: []
       calendar:
         round_corners: true
