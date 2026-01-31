@@ -1,9 +1,6 @@
-# This is default and very simple configuration file for Yasb.
-# For more information about configuration options, please visit the Wiki https://github.com/amnweb/yasb/wiki
 watch_stylesheet: true
 watch_config: true
 debug: false
-update_check: true # Enable automatic update check.
 komorebi:
   start_command: "komorebic start --whkd"
   stop_command: "komorebic stop --whkd"
@@ -11,21 +8,17 @@ komorebi:
 bars:
   primary-bar:
     enabled: true
-    screens: ["primary"]
+    screens: ["*"]
     class_name: "yasb-bar"
     alignment:
       position: "top"
-      center: false
-    animation:
-      enabled: true
-      duration: 1000
+      center: true
     blur_effect:
       enabled: true
-      acrylic: false
+      acrylic: true
       dark_mode: true
-      round_corners: true
-      round_corners_type: "normal"
-      border_color: "System"
+      round_corners: false
+      border_color: None
     window_flags:
       always_on_top: false
       windows_app_bar: true
@@ -33,66 +26,106 @@ bars:
       width: "100%"
       height: 32
     padding:
-      top: 6
-      left: 6
-      bottom: 6
-      right: 6
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
     widgets:
-      left: [
-          "glazewm_tiling_direction",
-          "glazewm_workspaces",
-          # "pomodoro",
-          "active_window",
-        ]
+      left: ["home", "glazewm_workspaces", "active_window"]
       center: ["clock"]
-      right: [
-          # "media",
-          "systray",
-          "systeminfo-grouper",
-          "brightness",
-          "volume",
-          "wifi",
-          "battery",
-          "notifications",
-          "power_menu",
-        ]
+      right: ["memory", "disk", "wifi", "volume", "battery", "power_menu"]
 widgets:
   home:
     type: "yasb.home.HomeWidget"
     options:
-      label: "<span>\udb81\udf17</span>"
+      label: "<span>\udb80\udf5c</span>"
       menu_list:
-        - { title: "My Crib", path: "~" }
-        - { title: "Loot Bag", path: "~\\Downloads" }
-        - { title: "Boring Stuff", path: "~\\Documents" }
-        - { title: "Cursed Memories", path: "~\\Pictures" }
+        - { title: "主目录", path: "~" }
+        - { title: "下载", path: "~\\Downloads" }
+        - { title: "文档", path: "~\\Documents" }
+        - { title: "图片", path: "~\\Pictures" }
+        - { title: "视频", path: "~\\Videos" }
+      menu_labels:
+        shutdown: "关机"
+        restart: "重启"
+        hibernate: "休眠"
+        logout: "登出"
+        lock: "锁定"
+        sleep: "睡眠"
+        system: "设置"
+        about: "关于本机"
+        task_manager: "任务管理器"
       system_menu: true
       power_menu: true
-      blur: false
-  media:
-    type: "yasb.media.MediaWidget"
+      blur: true
+      round_corners: true
+      round_corners_type: "small"
+      border_color: "#7aa2f7"
+      alignment: "left"
+      offset_left: 4
+      offset_top: 0
+  glazewm_workspaces:
+    type: "glazewm.workspaces.GlazewmWorkspacesWidget"
     options:
-      label: "<span>\uf001</span> {title}"
-      label_alt: "<span>\uf001</span> {artist}"
+      offline_label: "GlazeWM Offline"
+      hide_empty_workspaces: true
+      hide_if_offline: true
+  komorebi_workspaces:
+    type: "komorebi.workspaces.WorkspaceWidget"
+    options:
+      label_offline: "KomorebiWM Offline"
+      hide_empty_workspaces: true
+      hide_if_offline: true
+  memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      label: "<span>\uf4bc</span> {virtual_mem_outof}"
+      label_alt: "<span>\uf4bc</span> {virtual_mem_outof}"
+      update_interval: 10000
       callbacks:
-        on_left: "toggle_media_menu"
-        on_middle: "do_nothing"
-        on_right: "do_nothing"
-      max_field_size:
-        label: 50
-        label_alt: 24
-      show_thumbnail: false
-      controls_only: false
-      controls_left: true
-      hide_empty: true
-      thumbnail_alpha: 250
-      thumbnail_padding: 8
-      thumbnail_corner_radius: 0
-      icons:
-        prev_track: ""
-        next_track: ""
-        play: ""
-        pause: ""
+        on_right: "exec cmd /c Taskmgr"
+  disk:
+    type: "yasb.disk.DiskWidget"
+    options:
+      label: "<span>\uf473</span> disks"
+      label_alt: "<span>\uf473</span>"
+      group_label:
+        volume_labels:
+          [
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z",
+          ]
+        show_label_name: false
+        blur: true
+        round_corners: true
+        round_corners_type: "small"
+        border_color: "#7aa2f7"
+        alignment: "center"
+        offset_top: 0
+      callbacks:
+        on_left: "toggle_group"
   active_window:
     type: "yasb.active_window.ActiveWindowWidget"
     options:
@@ -101,94 +134,103 @@ widgets:
       label_no_window: ""
       label_icon: true
       label_icon_size: 14
-      max_length: 36
+      max_length: 50
       max_length_ellipsis: "..."
       monitor_exclusive: true
   clock:
     type: "yasb.clock.ClockWidget"
     options:
-      label: "{%H:%M:%S}"
-      label_alt: "{%H:%M:%S}"
+      label: "<span>\uf017</span>{%H:%M}"
+      label_alt: "<span>\uf017</span>{%A, %B %d. %Y %H:%M}"
+      locale: "hu_HU"
       timezones: []
-      locale: "zh"
-      callbacks:
-        on_left: "toggle_calendar"
+      calendar:
+        round_corners: true
+        round_corners_type: "small"
+        border_color: "#7aa2f7"
+        alignment: "center"
+        offset_top: 0
   weather:
     type: "yasb.weather.WeatherWidget"
     options:
       label: "<span>{icon}</span> {temp}"
-      label_alt: "{location}: Min {min_temp}, Max {max_temp}, Humidity {humidity}"
-      api_key: # Get your free API key from https://www.weatherapi.com/
+      label_alt: "{location}: {conditions}, Min {min_temp}, Max {max_temp}, Humidity {humidity}"
+      api_key: "24b6c2cda6d84066b0304531241908"
       update_interval: 600
       hide_decimal: true
-      location: # You can use "USA Los Angeles 90006" {COUNTRY CITY ZIP_CODE}, or just city.
+      location: "Hungary, Eger"
+      units: "metric"
       callbacks:
         on_left: "toggle_card"
       icons:
-        sunnyDay: "\ue30d"
-        clearNight: "\ue32b"
-        cloudyDay: "\ue312"
-        cloudyNight: "\ue311"
-        rainyDay: "\ue308"
-        rainyNight: "\ue333"
-        snowyIcyDay: "\ue30a"
-        snowyIcyNight: "\ue335"
-        blizzardDay: "\udb83\udf36"
-        blizzardNight: "\udb83\udf36"
-        foggyDay: "\ue303"
-        foggyNight: "\ue346"
-        thunderstormDay: "\ue30f"
-        thunderstormNight: "\ue338"
-        default: "\uebaa"
+        sunnyDay: "\udb81\udd99"
+        clearNight: "\ue3c2"
+        cloudyDay: "\ue21d"
+        cloudyNight: "\ue226"
+        rainyDay: "\ue371"
+        rainyNight: "\ue371"
+        snowyIcyDay: "\udb81\udf17"
+        snowyIcyNight: "\udb81\udf17"
+        blizzardDay: "\udb81\udd99"
+        default: "\udb81\udd99"
       weather_card:
-        blur: True
-        round_corners: True
-        round_corners_type: "normal"
-        border_color: "System"
-        alignment: "right"
+        blur: true
+        round_corners: true
+        round_corners_type: "small"
+        border_color: "#7aa2f7"
+        alignment: "center"
         direction: "down"
-        icon_size: 64
-        show_hourly_forecast: True # Set to False to disable hourly forecast
-        time_format: "12h" # can be 12h or 24h
-        hourly_point_spacing: 76
-        hourly_icon_size: 32 # better to set 16, 32 or 64 for better quality
-        icon_smoothing: true # should be true for smoother icon or false for sharper icon if using 16, 32 or 64 for hourly_icon_size
-        temp_line_width: 2 # can be 0 to hide the temperature line
-        current_line_color: "#8EAEE8"
-        current_line_width: 1 # can be 0 to hide the current hour line
-        current_line_style: "dot"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
+        offset_top: 0
+        icon_size: 48
+  wifi:
+    type: "yasb.wifi.WifiWidget"
+    options:
+      label: "<span>{wifi_icon}</span> {wifi_strength}%"
+      label_alt: "<span>{wifi_icon}</span> {wifi_name} {wifi_strength}%"
+      ethernet_label: "<span>{wifi_icon}</span>"
+      ethernet_label_alt: "<span>{wifi_icon}</span> {wifi_name}"
+      ethernet_icon: "\uf108"
+      update_interval: 5000
+      callbacks:
+        on_left: "exec quick_settings"
+        on_middle: "do_nothing"
+        on_right: "toggle_label"
+      wifi_icons: [
+          "\udb82\udd2e", # Icon for 0% strength
+          "\udb82\udd1f", # Icon for 1-20% strength
+          "\udb82\udd22", # Icon for 21-40% strength
+          "\udb82\udd25", # Icon for 41-80% strength
+          "\udb82\udd28", # Icon for 81-100% strength
+        ]
   volume:
     type: "yasb.volume.VolumeWidget"
     options:
       label: "<span>{icon}</span> {level}"
       label_alt: "{volume}"
-      tooltip: false
       volume_icons:
-        - "\ueee8"
-        - "\uf026"
-        - "\uf027"
-        - "\uf027"
-        - "\uf028"
+        - "\ueee8" # Icon for muted
+        - "\uf026" # Icon for 0-10% volume
+        - "\uf027" # Icon for 11-30% volume
+        - "\uf027" # Icon for 31-60% volume
+        - "\uf028" # Icon for 61-100% volume
+      audio_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "small"
+        border_color: "#7aa2f7"
+        alignment: "center"
+        direction: "down"
+        offset_top: 0
       callbacks:
-        on_left: "toggle_mute"
-        on_right: "exec cmd.exe /c start ms-settings:sound"
-  microphone:
-    type: "yasb.microphone.MicrophoneWidget"
+        on_right: "toggle_mute"
+  battery:
+    type: "yasb.battery.BatteryWidget"
     options:
-      label: "<span>{icon}</span> {level}"
-      label_alt: "<span>{icon}</span> {level}%"
-      icons:
-        normal: "\udb80\udf6c"
-        muted: "\udb80\udf6d"
-      callbacks:
-        on_left: "toggle_mute"
-        on_middle: "toggle_label"
-        on_right: "exec cmd.exe /c start ms-settings:sound"
+      label: "<span>{icon}</span>{percent}%"
+      label_alt: "<span>{icon}</span> {percent}% | time: {time_remaining}"
+      #hide_unsupported: true
+      charging_options:
+        icon_format: "{charging_icon}"
   power_menu:
     type: "yasb.power_menu.PowerMenuWidget"
     options:
@@ -199,369 +241,9 @@ widgets:
       animation_duration: 200
       button_row: 5
       buttons:
-        shutdown: ["\uf011", "Rage Quit"]
-        restart: ["\uead2", "Oops, Reboot"]
-        signout: ["\udb80\udf43", "Dip Out"]
-        hibernate: ["\uf28e", "Bear Mode"]
-        sleep: ["\u23fe", "Nap Time"]
-        cancel: ["", "Nah, Im Good "]
-  apps:
-    type: "yasb.applications.ApplicationsWidget"
-    options:
-      container_padding:
-        top: 0
-        left: 8
-        bottom: 0
-        right: 8
-      label: "{data}"
-      app_list:
-        - { icon: "\ueb03", launch: "cmd /c Taskmgr" }
-        - { icon: "\uf489", launch: "wt" }
-  notifications:
-    type: "yasb.notifications.NotificationsWidget"
-    options:
-      label: "<span>\uf476</span> {count}"
-      label_alt: "{count} notifications"
-      hide_empty: true
-      tooltip: false
-      callbacks:
-        on_left: "toggle_notification"
-        on_right: "do_nothing"
-        on_middle: "toggle_label"
-  wallpapers:
-    type: "yasb.wallpapers.WallpapersWidget"
-    options:
-      label: "<span>\udb83\ude09</span>"
-      image_path: # Example path to folder with images
-      change_automatically: false # Automatically change wallpaper
-      update_interval: 60 # If change_automatically is true, update interval in seconds
-      gallery:
-        enabled: true
-        blur: true
-        image_width: 220
-        image_per_page: 8
-        show_buttons: true
-        orientation: "portrait"
-        image_spacing: 8
-        lazy_load: true
-        lazy_load_delay: 80
-        lazy_load_fadein: 400
-        image_corner_radius: 20
-        enable_cache: true
-  cava:
-    type: "yasb.cava.CavaWidget"
-    options:
-      bar_height: 12
-      min_bar_height: 0
-      gradient: 1
-      reverse: 0
-      foreground: "#89b4fa"
-      gradient_color_1: "#74c7ec"
-      gradient_color_2: "#89b4fa"
-      gradient_color_3: "#cba6f7"
-      bars_number: 8
-      bar_spacing: 2
-      bar_width: 4
-      hide_empty: true
-      container_padding:
-        top: 0
-        left: 8
-        bottom: 0
-        right: 8
-  cpu:
-    type: "yasb.cpu.CpuWidget"
-    options:
-      label: "<span>\uf4bc</span> {info[percent][total]}"
-      label_alt: "<span>\uf437</span> {info[histograms][cpu_percent]}"
-      update_interval: 2000
-      cpu_thresholds:
-        low: 25
-        medium: 50
-        high: 90
-      histogram_icons:
-        - "\u2581" # 0%
-        - "\u2581" # 10%
-        - "\u2582" # 20%
-        - "\u2583" # 30%
-        - "\u2584" # 40%
-        - "\u2585" # 50%
-        - "\u2586" # 60%
-        - "\u2587" # 70%
-        - "\u2588" # 80%+
-      histogram_num_columns: 8
-      callbacks:
-        on_right: "exec cmd /c Taskmgr"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  glazewm_workspaces:
-    type: "glazewm.workspaces.GlazewmWorkspacesWidget"
-    options:
-      # Offline behavior (matching komorebi's label_offline and hide_if_offline)
-      offline_label: "GlazeWM Offline"
-      hide_if_offline: true
-
-      # Workspace display labels (matching komorebi's label_workspace_btn and label_workspace_active_btn)
-      populated_label: "\udb85\udcfc"
-      empty_label: "\udb85\udcfc"
-      active_populated_label: "\udb85\udcfb"
-      active_empty_label: "\udb85\udcfb"
-
-      # Workspace management (matching komorebi's hide_empty_workspaces)
-      hide_empty_workspaces: false
-
-      # Server connection
-      glazewm_server_uri: "ws://localhost:6123"
-
-      # Additional GlazeWM-specific options (keeping defaults)
-      enable_scroll_switching: true
-      reverse_scroll_direction: true
-      container_padding:
-        top: 0
-        left: 0
-        bottom: 0
-        right: 0
-  glazewm_tiling_direction:
-    type: "glazewm.tiling_direction.GlazewmTilingDirectionWidget"
-    options:
-      horizontal_label: "\udb81\udce1"
-      vertical_label: "\udb81\udce2"
-      btn_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  pomodoro:
-    type: "yasb.pomodoro.PomodoroWidget"
-    options:
-      label: "<span>{icon}</span> {remaining}"
-      label_alt: "<span>{icon}</span> {session}/{total_sessions} - {status}"
-      work_duration: 25
-      break_duration: 5
-      long_break_duration: 15
-      long_break_interval: 4
-      auto_start_breaks: true
-      auto_start_work: true
-      sound_notification: true
-      show_notification: true
-      hide_on_break: false
-      session_target: 8
-      icons:
-        work: "\uf252"
-        break: "\uf253"
-        paused: "\uf254"
-      container_padding:
-        top: 0
-        left: 12
-        bottom: 0
-        right: 12
-      menu:
-        blur: true
-        round_corners: true
-        round_corners_type: "normal"
-        border_color: "System"
-        alignment: "right"
-        direction: "down"
-        offset_top: 6
-        offset_left: 0
-        circle_background_color: "#09ffffff"
-        circle_work_progress_color: "#88c0d0"
-        circle_break_progress_color: "#a3be8c"
-        circle_thickness: 8
-        circle_size: 160
-      callbacks:
-        on_left: "toggle_menu"
-        on_middle: "reset_timer"
-        on_right: "toggle_label"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  memory:
-    type: "yasb.memory.MemoryWidget"
-    options:
-      label: "<span>\uf4bc</span> {virtual_mem_percent}"
-      label_alt: "<span>\uf4bc</span> VIRT: {virtual_mem_percent}% SWAP: {swap_mem_percent}%"
-      update_interval: 5000
-      callbacks:
-        on_left: "toggle_label"
-        on_middle: "do_nothing"
-        on_right: "do_nothing"
-      memory_thresholds:
-        low: 25
-        medium: 50
-        high: 90
-      histogram_icons:
-        - "\u2581" # 0%
-        - "\u2581" # 10%
-        - "\u2582" # 20%
-        - "\u2583" # 30%
-        - "\u2584" # 40%
-        - "\u2585" # 50%
-        - "\u2586" # 60%
-        - "\u2587" # 70%
-        - "\u2588" # 80%+
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  bluetooth:
-    type: "yasb.bluetooth.BluetoothWidget"
-    options:
-      label: "<span>{icon}</span> {device_count}"
-      label_alt: "{device_name}"
-      label_no_device: "No devices connected"
-      label_device_separator: ", "
-      max_length: 10
-      max_length_ellipsis: "..."
-      icons:
-        bluetooth_on: "\udb80\udcaf"
-        bluetooth_off: "\udb80\udcb2"
-        bluetooth_connected: "\udb80\udcb1"
-      device_aliases:
-        - name: "T5.0"
-          alias: "\uf025"
-      callbacks:
-        on_left: "toggle_label"
-        on_right: "exec cmd.exe /c start ms-settings:bluetooth"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  wifi:
-    type: "yasb.wifi.WifiWidget"
-    options:
-      label: "<span>{wifi_icon}</span>"
-      label_alt: "{wifi_name} {wifi_strength}%"
-      update_interval: 5000
-      callbacks:
-        on_left: "toggle_menu"
-        on_middle: "exec cmd.exe /c start ms-settings:network"
-        on_right: "toggle_label"
-      ethernet_label: "<span>{wifi_icon}</span>"
-      ethernet_label_alt: "<span>{wifi_icon}</span>{ip_addr}"
-      ethernet_icon: "\ueba9"
-      get_exact_wifi_strength: false # Optional. Will require location access permission if true.
-      wifi_icons: [
-          "\udb82\udd2e", # Icon for 0% strength
-          "\udb82\udd1f", # Icon for 1-24% strength
-          "\udb82\udd22", # Icon for 25-49% strength
-          "\udb82\udd25", # Icon for 50-74% strength
-          "\udb82\udd28", # Icon for 75-100% strength
-        ]
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-      menu_config:
-        blur: true
-        round_corners: true
-        round_corners_type: "normal"
-        border_color: "System"
-        alignment: "right"
-        direction: "down"
-        offset_top: 6
-        offset_left: 0
-        wifi_icons_secured: ["\ue670", "\ue671", "\ue672", "\ue673"]
-        wifi_icons_unsecured: ["\uec3c", "\uec3d", "\uec3e", "\uec3f"]
-  brightness:
-    type: "yasb.brightness.BrightnessWidget"
-    options:
-      label: "<span>{icon}</span> {percent}%"
-      label_alt: "Brightness {percent}%"
-      tooltip: false
-      hide_unsupported: true
-      brightness_toggle_level: [0, 50, 100]
-      auto_light: false
-      auto_light_icon: "\udb80\udce1"
-      auto_light_night_level: 35
-      auto_light_night_start_time: "19:00"
-      auto_light_night_end_time: "06:45"
-      auto_light_day_level: 75
-      brightness_icons: [
-          "\udb80\udcde", # Icon for 0-25% brightness
-          "\udb80\udcdd", # Icon for 26-50% brightness
-          "\udb80\udcdf", # Icon for 51-75% brightness
-          "\udb80\udce0", # Icon for 76-100% brightness
-        ]
-      brightness_menu:
-        blur: true
-        round_corners: true
-        round_corners_type: "normal"
-        border_color: "System"
-        alignment: "right"
-        direction: "down"
-      callbacks:
-        on_left: "toggle_label"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  battery:
-    type: "yasb.battery.BatteryWidget"
-    options:
-      label: "<span>{icon}</span> {percent}%"
-      label_alt: "<span>{icon}</span> {percent}% | {power}W"
-      update_interval: 5000
-      time_remaining_natural: False
-      hide_unsupported: True
-      charging_options:
-        icon_format: "{charging_icon}"
-        blink_charging_icon: true
-        blink_interval: 500
-      status_thresholds:
-        critical: 10
-        low: 25
-        medium: 75
-        high: 95
-        full: 100
-      status_icons:
-        icon_charging: "\uf0e7"
-        icon_critical: "\uf244"
-        icon_low: "\uf243"
-        icon_medium: "\uf242"
-        icon_high: "\uf241"
-        icon_full: "\uf240"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
-  systeminfo-grouper:
-    type: "yasb.grouper.GrouperWidget"
-    options:
-      class_name: "systeminfo-grouper"
-      widgets: ["microphone", "bluetooth"]
-      collapse_options:
-        enabled: true
-        exclude_widgets: ["battery"] # Battery widget stays visible when collapsed
-        expanded_label: "\uf054"
-        collapsed_label: "\uf053"
-        label_position: "right"
-
-  systray:
-    type: "yasb.systray.SystrayWidget"
-    options:
-      class_name: "systray"
-      label_collapsed: "▼"
-      label_expanded: "▶"
-      label_position: "left" # Can be "left" or "right"
-      icon_size: 16 # Can be any integer between 8 and 64
-      pin_click_modifier: "alt" # Can be "ctrl", "alt" or "shift"
-      show_unpinned: false
-      show_unpinned_button: true
-      show_battery: false
-      show_volume: false
-      show_network: false
-      btn_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
+        shutdown: ["\uf011", "Shut Down"]
+        restart: ["\uead2", "Restart"]
+        signout: ["\udb80\udf43", "Sign out"]
+        hibernate: ["\uf28e", "Hibernate"]
+        sleep: ["\u23fe", "Sleep"]
+        cancel: ["", "Cancel"]
