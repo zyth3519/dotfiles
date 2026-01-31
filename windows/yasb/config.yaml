@@ -192,8 +192,8 @@ widgets:
       ethernet_icon: "\uf108"
       update_interval: 5000
       callbacks:
-        on_left: "exec quick_settings"
-        on_middle: "do_nothing"
+        on_left: "toggle_menu"
+        on_middle: "exec cmd.exe /c start ms-settings:network"
         on_right: "toggle_label"
       wifi_icons: [
           "\udb82\udd2e", # Icon for 0% strength
@@ -202,6 +202,17 @@ widgets:
           "\udb82\udd25", # Icon for 41-80% strength
           "\udb82\udd28", # Icon for 81-100% strength
         ]
+      menu_config:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "System"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+        wifi_icons_secured: ["\ue670", "\ue671", "\ue672", "\ue673"]
+        wifi_icons_unsecured: ["\uec3c", "\uec3d", "\uec3e", "\uec3f"]
   volume:
     type: "yasb.volume.VolumeWidget"
     options:
